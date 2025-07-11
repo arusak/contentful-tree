@@ -1,4 +1,4 @@
-import { Alert, Box, Container, Heading } from '@chakra-ui/react'
+import { Alert, Container } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import './App.css'
 
@@ -21,12 +21,6 @@ function App() {
 
   return (
     <Container maxW="container.lg" padding="1rem 2rem">
-      <Box>
-        <Heading as="h1" size="xl">
-          Instructions Catalog
-        </Heading>
-      </Box>
-
       {error && (
         <Alert.Root status="error" className="mb-6 rounded-md">
           <Alert.Title>Error loading content!</Alert.Title>

@@ -17,7 +17,7 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
   })
 
   return (
-    <Flex alignItems="center" gap={2} marginBottom={16}>
+    <Flex alignItems="center" gap={2} margin={'2rem 0'} fontSize={'150%'}>
       <Box>Select User Role:</Box>
       <Select.Root
         value={selectedRoleId ? [selectedRoleId] : undefined}
@@ -28,7 +28,7 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
         className="w-full"
         collection={options}
         data-testid="role-selector">
-        <Select.Control>
+        <Select.Control style={{ border: '1px solid #ddd', borderRadius: '0.25rem' }}>
           <Select.Trigger>
             <Select.ValueText placeholder="Select User Role" />
           </Select.Trigger>
