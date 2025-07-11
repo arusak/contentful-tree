@@ -15,8 +15,8 @@ const SelectValue = () => {
   return (
     <Select.ValueText>
       <Flex alignItems="center" gap={12}>
-        <Box width={12} height={12} background={item.fields.color as string} borderRadius={'50%'} />
-        {item.fields.title as string}
+        <Box width={12} height={12} background={item?.fields.color as string} borderRadius={'50%'} />
+        {String(item?.fields.title)}
       </Flex>
     </Select.ValueText>
   )
