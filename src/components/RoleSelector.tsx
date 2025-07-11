@@ -1,4 +1,4 @@
-import { Box, createListCollection, Flex, Portal, Select, Spinner } from '@chakra-ui/react'
+import { Box, createListCollection, Flex, Portal, Select, Spinner, useSelectContext } from '@chakra-ui/react'
 import type { FC } from 'react'
 import type { EmployeeRoleEntry } from '../types/contentful'
 
@@ -9,6 +9,19 @@ type Props = {
   isLoading: boolean
 }
 
+const SelectValue = () => {
+  const select = useSelectContext()
+  const [item] = select.selectedItems as EmployeeRoleEntry[]
+  return (
+    <Select.ValueText>
+      <Flex alignItems="center" gap={12}>
+        <Box width={12} height={12} background={item.fields.color as string} borderRadius={'50%'} />
+        {item.fields.title as string}
+      </Flex>
+    </Select.ValueText>
+  )
+}
+
 const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoading }) => {
   const options = createListCollection({
     items: roles,
@@ -17,7 +30,7 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
   })
 
   return (
-    <Flex alignItems="center" gap={2} margin={'2rem 0'} fontSize={'150%'}>
+    <Flex alignItems="center" gap={12} margin={'2rem 0'} fontSize={'150%'}>
       <Box>Select User Role:</Box>
       <Select.Root
         value={selectedRoleId ? [selectedRoleId] : undefined}
@@ -30,7 +43,7 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
         data-testid="role-selector">
         <Select.Control style={{ border: '1px solid #ddd', borderRadius: '0.25rem' }}>
           <Select.Trigger>
-            <Select.ValueText placeholder="Select User Role" />
+            <SelectValue />
           </Select.Trigger>
           <Select.IndicatorGroup>
             {isLoading && <Spinner size="xs" borderWidth="1.5px" color="fg.muted" />}

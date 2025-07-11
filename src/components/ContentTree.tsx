@@ -41,7 +41,7 @@ const ContentTree: React.FC<ContentTreeProps> = ({ folders, instructions, roles 
         )}
       </Box>
       {instruction && (
-        <Box margin={'2rem 1rem 0'} padding={'1rem 4rem'} borderRadius={'0.25rem'} backgroundColor="white">
+        <Box margin={'2rem 1rem 0'} padding={'1rem 4rem 2rem'} borderRadius={'0.25rem'} backgroundColor="white">
           <Heading as="h2" mb={4}>
             {String(instruction.fields.title)}
           </Heading>
