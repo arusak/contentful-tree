@@ -8,16 +8,8 @@ import RoleSelector from './components/RoleSelector'
 import { useContentful } from './hooks/useContentful'
 
 function App() {
-  // Get data from Contentful
   const { roles, loading, error, folders, instructions } = useContentful()
-
-  // State for selected role
   const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null)
-
-  // Handle role change
-  const handleRoleChange = (roleId: string | null) => {
-    setSelectedRoleId(roleId)
-  }
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: This effect runs only once to set the initial role
   useEffect(() => {
@@ -26,7 +18,7 @@ function App() {
   }, [roles])
 
   return (
-    <Container maxW="container.lg">
+    <Container maxW="container.lg" padding="1rem 2rem">
       <Box>
         <Heading as="h1" size="xl">
           Instructions Catalog
@@ -34,7 +26,7 @@ function App() {
         <RoleSelector
           roles={roles}
           selectedRoleId={selectedRoleId}
-          onRoleChange={handleRoleChange}
+          onRoleChange={setSelectedRoleId}
           isLoading={loading}
         />
       </Box>

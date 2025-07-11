@@ -1,15 +1,15 @@
-import { Box, createListCollection, Portal, Select, Spinner } from '@chakra-ui/react'
+import { Box, createListCollection, Flex, Portal, Select, Spinner } from '@chakra-ui/react'
 import type { FC } from 'react'
 import type { EmployeeRoleEntry } from '../types/contentful'
 
-interface RoleSelectorProps {
+type Props = {
   roles: EmployeeRoleEntry[]
   selectedRoleId: string | null
   onRoleChange: (roleId: string | null) => void
   isLoading: boolean
 }
 
-const RoleSelector: FC<RoleSelectorProps> = ({ roles, selectedRoleId, onRoleChange, isLoading }) => {
+const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoading }) => {
   const options = createListCollection({
     items: roles,
     itemToString: (r) => r.fields.title as string,
@@ -17,21 +17,17 @@ const RoleSelector: FC<RoleSelectorProps> = ({ roles, selectedRoleId, onRoleChan
   })
 
   return (
-    <Box className="w-full max-w-md mx-auto mb-6">
+    <Flex alignItems="center" gap={2} marginBottom={16}>
+      <Box>Select User Role:</Box>
       <Select.Root
         value={selectedRoleId ? [selectedRoleId] : undefined}
-        onChange={(e) => {
-          const target = e.target as HTMLSelectElement
-          const value = target.value
-          onRoleChange(value)
-        }}
+        onValueChange={(details) => onRoleChange(details.value[0] || null)}
         disabled={isLoading || roles.length === 0}
         bg="white"
         borderColor="gray.300"
         className="w-full"
         collection={options}
         data-testid="role-selector">
-        <Select.Label>Select User Role:</Select.Label>
         <Select.Control>
           <Select.Trigger>
             <Select.ValueText placeholder="Select User Role" />
@@ -46,15 +42,17 @@ const RoleSelector: FC<RoleSelectorProps> = ({ roles, selectedRoleId, onRoleChan
             <Select.Content>
               {options.items.map((i) => (
                 <Select.Item item={i} key={i.sys.id}>
-                  {i.fields.title as string}
-                  {/*<Select.ItemIndicator />*/}
+                  <Flex alignItems="center" gap={6} background="white" padding={'0.5rem 0.5rem'} cursor="pointer">
+                    <Box width={8} height={8} background={i.fields.color as string} borderRadius={'50%'} />
+                    {i.fields.title as string}
+                  </Flex>
                 </Select.Item>
               ))}
             </Select.Content>
           </Select.Positioner>
         </Portal>
       </Select.Root>
-    </Box>
+    </Flex>
   )
 }
 
