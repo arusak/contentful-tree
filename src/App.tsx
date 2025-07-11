@@ -2,7 +2,7 @@ import { Alert, Container } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import './App.css'
 
-import ContentTree from './components/ContentTree.tsx'
+import { ContentTree } from './components/ContentTree.tsx'
 import LoadingSpinner from './components/LoadingSpinner'
 import RoleSelector from './components/RoleSelector'
 import { useContentful } from './hooks/useContentful'
