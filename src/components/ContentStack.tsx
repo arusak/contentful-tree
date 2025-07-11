@@ -43,12 +43,12 @@ export const ContentStack: FC<Props> = ({
           <Box
             display="grid"
             gridTemplateColumns="1fr auto"
-            background="#ddd"
             padding={20}
             rounded="md"
             shadow="sm"
             minHeight={90}
-            outline={selectedFolder === f ? '0.25rem solid tan' : 'none'}
+            background={selectedFolder === f ? 'teal' : '#ddd'}
+            color={selectedFolder === f ? 'white' : 'inherit'}
             alignItems="center"
             key={f.sys.id}
             cursor="pointer"
@@ -56,7 +56,9 @@ export const ContentStack: FC<Props> = ({
               selectFolder(f)
             }}>
             <Box>{String(f.fields.title)}</Box>
-            <Box>&gt;</Box>
+            <Box fontSize={'2rem'} fontWeight={'bold'}>
+              &gt;
+            </Box>
           </Box>
         ))}
         {instructions.map((i) => (
