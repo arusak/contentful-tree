@@ -20,7 +20,18 @@ export const ContentStack: FC<Props> = ({
   const [selectedFolder, selectFolder] = useState<FolderEntry | null>(null)
   // @ts-expect-error todo
   const childrenIds: string[] = parent.fields.children?.map((child) => child.sys.id) ?? []
-  const folders = childrenIds.map((id) => foldersMap.get(id)).filter(Boolean) as FolderEntry[]
+  const allEntriesIds = new Set([...foldersMap.keys(), ...instructionsMap.keys()])
+  const folders = childrenIds
+    .map((id) => foldersMap.get(id))
+    .filter(Boolean)
+    .filter(
+      (f) =>
+        !!f?.fields.children &&
+        // @ts-expect-error
+        f.fields.children.length > 0 &&
+        // @ts-expect-error
+        f.fields.children.some((child) => allEntriesIds.has(child.sys.id)),
+    ) as FolderEntry[]
   const instructions = childrenIds.map((id) => instructionsMap.get(id)).filter(Boolean) as InstructionEntry[]
 
   return (

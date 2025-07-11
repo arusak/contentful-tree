@@ -11,6 +11,8 @@ function App() {
   const { roles, loading, error, folders, instructions } = useContentful()
   const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null)
 
+  // @ts-expect-error
+  const instructionsForRole = instructions.filter((i) => i.fields.roles?.some((role) => role.sys.id === selectedRoleId))
   // biome-ignore lint/correctness/useExhaustiveDependencies: This effect runs only once to set the initial role
   useEffect(() => {
     if (roles.length === 0 || selectedRoleId) return
@@ -23,12 +25,6 @@ function App() {
         <Heading as="h1" size="xl">
           Instructions Catalog
         </Heading>
-        <RoleSelector
-          roles={roles}
-          selectedRoleId={selectedRoleId}
-          onRoleChange={setSelectedRoleId}
-          isLoading={loading}
-        />
       </Box>
 
       {error && (
@@ -38,7 +34,19 @@ function App() {
         </Alert.Root>
       )}
 
-      {loading ? <LoadingSpinner /> : <ContentTree folders={folders} instructions={instructions} roles={roles} />}
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <RoleSelector
+            roles={roles}
+            selectedRoleId={selectedRoleId}
+            onRoleChange={setSelectedRoleId}
+            isLoading={loading}
+          />
+          <ContentTree key={selectedRoleId} folders={folders} instructions={instructionsForRole} roles={roles} />
+        </>
+      )}
     </Container>
   )
 }
