@@ -1,5 +1,5 @@
-import { Box, Heading, HStack, Text } from '@chakra-ui/react'
-import { useState } from 'react'
+import { Bleed, Box, EmptyState, Flex, Grid, Heading, HStack, Text, VStack } from '@chakra-ui/react'
+import { type FC, useState } from 'react'
 import type { EmployeeRoleEntry, FolderEntry, InstructionEntry } from '../types/contentful'
 import { ContentStack } from './ContentStack.tsx'
 
@@ -9,7 +9,7 @@ interface ContentTreeProps {
   roles: EmployeeRoleEntry[]
 }
 
-export const ContentTree: React.FC<ContentTreeProps> = ({ folders, instructions, roles }) => {
+export const ContentTree: FC<ContentTreeProps> = ({ folders, instructions, roles }) => {
   const [instruction, setInstruction] = useState<InstructionEntry | null>(null)
 
   const folderMap = new Map<string, FolderEntry>()
@@ -24,10 +24,10 @@ export const ContentTree: React.FC<ContentTreeProps> = ({ folders, instructions,
   const rootFolder = folders.find((folder) => folder.fields.title === 'root')
 
   return (
-    <>
+    <Flex direction={'column'} gap={8}>
       <Box>
         {rootFolder ? (
-          <Box display={'grid'} gridTemplateColumns={'repeat(6, 16rem)'} gap={4}>
+          <Grid templateColumns={'repeat(6, 16rem)'} gap={4}>
             <ContentStack
               foldersMap={folderMap}
               instructionsMap={instructionMap}
@@ -35,25 +35,34 @@ export const ContentTree: React.FC<ContentTreeProps> = ({ folders, instructions,
               onShowInstruction={setInstruction}
               selectedInstruction={instruction}
             />
-          </Box>
+          </Grid>
         ) : (
-          <Text className="text-center p-4">No content found.</Text>
+          <EmptyState.Root>
+            <EmptyState.Content>
+              <VStack textAlign="center">
+                <EmptyState.Title>No content is available</EmptyState.Title>
+                <EmptyState.Description>
+                  Please check your Contentful setup or contact your administrator.
+                </EmptyState.Description>
+              </VStack>
+            </EmptyState.Content>
+          </EmptyState.Root>
         )}
       </Box>
+
       {instruction && (
-        <Box m={'2rem 1rem 0'} p={'2rem 4rem 2rem'} rounded={1} bg="white" shadow="2px 2px 8px rgba(0,0,0,0.1)">
+        <Flex direction={'column'} gap={4} p={'2rem 4rem'} rounded="md" bg="white" shadow="lg">
           <HStack>
             {(instruction.fields.roles as EmployeeRoleEntry[]).sort(compareRoles).map((role) => (
               <Box key={role.sys.id} w={6} h={6} bg={role.fields.color as string} rounded={'50%'} />
             ))}
           </HStack>
-          <Heading as="h2" mb={1}>
-            {String(instruction.fields.title)}
-          </Heading>
-          <Text mb={1}>{String(instruction.fields.description)}</Text>
-        </Box>
+          <Bleed />
+          <Heading as="h2">{String(instruction.fields.title)}</Heading>
+          <Text>{String(instruction.fields.description)}</Text>
+        </Flex>
       )}
-    </>
+    </Flex>
   )
 }
 

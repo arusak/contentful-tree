@@ -22,7 +22,7 @@ const SelectValue = () => {
   )
 }
 
-const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoading }) => {
+export const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoading }) => {
   const options = createListCollection({
     items: roles,
     itemToString: (r) => r.fields.title as string,
@@ -31,23 +31,21 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
 
   return (
     <Flex align="center" gap={3} m={'2rem 0'} fontSize={'150%'}>
-      <Box>Select User Role:</Box>
+      <Box flexShrink={0}>Select User Role:</Box>
       <Select.Root
         value={selectedRoleId ? [selectedRoleId] : undefined}
         onValueChange={(details) => onRoleChange(details.value[0] || null)}
         disabled={isLoading || roles.length === 0}
         bg="white"
         borderColor="gray.300"
-        className="w-full"
-        collection={options}
-        data-testid="role-selector">
-        <Select.Control style={{ border: '1px solid #ddd', borderRadius: '0.25rem' }}>
+        collection={options}>
+        <Select.Control>
           <Select.Trigger>
             <SelectValue />
           </Select.Trigger>
           <Select.IndicatorGroup>
             {isLoading && <Spinner size="xs" borderWidth="1.5px" color="fg.muted" />}
-            {/*<Select.Indicator />*/}
+            <Select.Indicator />
           </Select.IndicatorGroup>
         </Select.Control>
         <Portal>
@@ -55,7 +53,7 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
             <Select.Content>
               {options.items.map((i) => (
                 <Select.Item item={i} key={i.sys.id}>
-                  <Flex align="center" gap={2} bg="white" p={'0.5rem 0.5rem'} cursor="pointer">
+                  <Flex align="center" gap={2} p={'0.5rem 0.5rem'} cursor="pointer">
                     <Box w={2} h={2} bg={i.fields.color as string} rounded={'50%'} />
                     {i.fields.title as string}
                   </Flex>
@@ -68,5 +66,3 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
     </Flex>
   )
 }
-
-export default RoleSelector

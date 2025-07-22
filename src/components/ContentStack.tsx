@@ -1,4 +1,5 @@
-import { Box, Icon, Stack } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Separator, Stack } from '@chakra-ui/react'
+import { ChevronRight, FileText } from 'lucide-react'
 import { type FC, useState } from 'react'
 import type { FolderEntry, InstructionEntry } from '../types/contentful.ts'
 
@@ -19,7 +20,7 @@ export const ContentStack: FC<Props> = ({
 }) => {
   const [selectedFolder, selectFolder] = useState<FolderEntry | null>(null)
   // @ts-expect-error todo
-  const childrenIds: string[] = parent.fields.children?.map((child) => child.sys.id) ?? []
+  const childrenIds: string[] = parent?.fields?.children?.map((child) => child.sys.id) ?? []
   const allEntriesIds = new Set([...foldersMap.keys(), ...instructionsMap.keys()])
   const folders = childrenIds
     .map((id) => foldersMap.get(id))
@@ -37,18 +38,18 @@ export const ContentStack: FC<Props> = ({
   return (
     <>
       <Stack gap={4}>
-        <Box borderBottom={'thin solid #ddd'}>{String(parent.fields.title)}</Box>
+        <Box borderColor="gray.200" borderBottomWidth="thin">
+          {String(parent?.fields.title)}
+        </Box>
 
         {folders.map((f) => (
-          <Box
-            display="grid"
-            gridTemplateColumns="1fr auto"
+          <Grid
+            templateColumns="1fr auto"
             p={4}
             gap={2}
             rounded="md"
-            shadow="sm"
             minH={90}
-            bg={selectedFolder === f ? 'teal' : '#ddd'}
+            bg={selectedFolder === f ? 'green.600' : 'gray.200'}
             color={selectedFolder === f ? 'white' : 'inherit'}
             alignItems="center"
             key={f.sys.id}
@@ -56,23 +57,24 @@ export const ContentStack: FC<Props> = ({
             onClick={() => {
               selectFolder(f)
             }}>
-            <Box>{String(f.fields.title)}</Box>
-            <Box fontSize={'2rem'} fontWeight={'bold'}>
-              &gt;
-            </Box>
-          </Box>
+            <GridItem>{String(f.fields.title)}</GridItem>
+            <GridItem>
+              <ChevronRight />
+            </GridItem>
+          </Grid>
         ))}
+
+        {folders.length > 0 && instructions.length > 0 && <Separator />}
+
         {instructions.map((i) => (
-          <Box
-            bg="#ddd"
-            display="grid"
-            gridTemplateColumns="1fr auto"
+          <Grid
+            templateColumns="1fr auto"
             gap={2}
             alignItems="center"
             p={4}
             rounded="md"
+            bg="gray.200"
             outline={selectedInstruction === i ? '0.25rem solid orange' : 'none'}
-            shadow="sm"
             minH={90}
             key={i.sys.id}
             cursor="pointer"
@@ -80,30 +82,10 @@ export const ContentStack: FC<Props> = ({
               onShowInstruction(i)
             }}>
             <Box>{String(i.fields.title)}</Box>
-            <Icon>
-              {/** biome-ignore lint/a11y/noSvgWithoutTitle: no */}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M14 2H6C4.9 2 4 2.9 4 4v16c0 1.1 0.9 2 2 2h12c1.1 0 2-0.9 2-2V8l-6-6z"
-                  fill="#f8f9fa"
-                  stroke="#374151"
-                  stroke-width="2"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M14 2v6h6"
-                  fill="none"
-                  stroke="#374151"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <line x1="8" y1="13" x2="16" y2="13" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" />
-                <line x1="8" y1="17" x2="16" y2="17" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" />
-                <line x1="8" y1="9" x2="12" y2="9" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" />
-              </svg>
-            </Icon>
-          </Box>
+            <GridItem>
+              <FileText />
+            </GridItem>
+          </Grid>
         ))}
       </Stack>
       {selectedFolder && folders.includes(selectedFolder) && (
