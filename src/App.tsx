@@ -20,7 +20,7 @@ function App() {
   }, [roles])
 
   return (
-    <Container maxW="container.lg" padding="1rem 2rem">
+    <Container maxW="container.lg" p="1rem 2rem">
       {error && (
         <Alert.Root status="error" className="mb-6 rounded-md">
           <Alert.Title>Error loading content!</Alert.Title>

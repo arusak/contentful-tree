@@ -27,7 +27,7 @@ export const ContentTree: React.FC<ContentTreeProps> = ({ folders, instructions,
     <>
       <Box>
         {rootFolder ? (
-          <Box display={'grid'} gridTemplateColumns={'repeat(6, 16rem)'} gap={16}>
+          <Box display={'grid'} gridTemplateColumns={'repeat(6, 16rem)'} gap={4}>
             <ContentStack
               foldersMap={folderMap}
               instructionsMap={instructionMap}
@@ -41,27 +41,16 @@ export const ContentTree: React.FC<ContentTreeProps> = ({ folders, instructions,
         )}
       </Box>
       {instruction && (
-        <Box
-          margin={'2rem 1rem 0'}
-          padding={'2rem 4rem 2rem'}
-          borderRadius={'0.25rem'}
-          backgroundColor="white"
-          boxShadow="2px 2px 8px rgba(0,0,0,0.1)">
+        <Box m={'2rem 1rem 0'} p={'2rem 4rem 2rem'} rounded={1} bg="white" shadow="2px 2px 8px rgba(0,0,0,0.1)">
           <HStack>
             {(instruction.fields.roles as EmployeeRoleEntry[]).sort(compareRoles).map((role) => (
-              <Box
-                key={role.sys.id}
-                width={24}
-                height={24}
-                background={role.fields.color as string}
-                borderRadius={'50%'}
-              />
+              <Box key={role.sys.id} w={6} h={6} bg={role.fields.color as string} rounded={'50%'} />
             ))}
           </HStack>
-          <Heading as="h2" mb={4}>
+          <Heading as="h2" mb={1}>
             {String(instruction.fields.title)}
           </Heading>
-          <Text mb={4}>{String(instruction.fields.description)}</Text>
+          <Text mb={1}>{String(instruction.fields.description)}</Text>
         </Box>
       )}
     </>

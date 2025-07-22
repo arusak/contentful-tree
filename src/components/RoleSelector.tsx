@@ -14,8 +14,8 @@ const SelectValue = () => {
   const [item] = select.selectedItems as EmployeeRoleEntry[]
   return (
     <Select.ValueText>
-      <Flex alignItems="center" gap={12}>
-        <Box width={12} height={12} background={item?.fields.color as string} borderRadius={'50%'} />
+      <Flex align="center" gap={3}>
+        <Box w={3} h={3} bg={item?.fields.color as string} rounded={'50%'} />
         {String(item?.fields.title)}
       </Flex>
     </Select.ValueText>
@@ -30,7 +30,7 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
   })
 
   return (
-    <Flex alignItems="center" gap={12} margin={'2rem 0'} fontSize={'150%'}>
+    <Flex align="center" gap={3} m={'2rem 0'} fontSize={'150%'}>
       <Box>Select User Role:</Box>
       <Select.Root
         value={selectedRoleId ? [selectedRoleId] : undefined}
@@ -55,8 +55,8 @@ const RoleSelector: FC<Props> = ({ roles, selectedRoleId, onRoleChange, isLoadin
             <Select.Content>
               {options.items.map((i) => (
                 <Select.Item item={i} key={i.sys.id}>
-                  <Flex alignItems="center" gap={6} background="white" padding={'0.5rem 0.5rem'} cursor="pointer">
-                    <Box width={8} height={8} background={i.fields.color as string} borderRadius={'50%'} />
+                  <Flex align="center" gap={2} bg="white" p={'0.5rem 0.5rem'} cursor="pointer">
+                    <Box w={2} h={2} bg={i.fields.color as string} rounded={'50%'} />
                     {i.fields.title as string}
                   </Flex>
                 </Select.Item>

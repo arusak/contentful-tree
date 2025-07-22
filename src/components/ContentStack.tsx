@@ -36,18 +36,19 @@ export const ContentStack: FC<Props> = ({
 
   return (
     <>
-      <Stack gap={16}>
+      <Stack gap={4}>
         <Box borderBottom={'thin solid #ddd'}>{String(parent.fields.title)}</Box>
 
         {folders.map((f) => (
           <Box
             display="grid"
             gridTemplateColumns="1fr auto"
-            padding={20}
+            p={4}
+            gap={2}
             rounded="md"
             shadow="sm"
-            minHeight={90}
-            background={selectedFolder === f ? 'teal' : '#ddd'}
+            minH={90}
+            bg={selectedFolder === f ? 'teal' : '#ddd'}
             color={selectedFolder === f ? 'white' : 'inherit'}
             alignItems="center"
             key={f.sys.id}
@@ -63,15 +64,16 @@ export const ContentStack: FC<Props> = ({
         ))}
         {instructions.map((i) => (
           <Box
-            background="#ddd"
+            bg="#ddd"
             display="grid"
             gridTemplateColumns="1fr auto"
+            gap={2}
             alignItems="center"
-            padding={20}
+            p={4}
             rounded="md"
             outline={selectedInstruction === i ? '0.25rem solid orange' : 'none'}
             shadow="sm"
-            minHeight={90}
+            minH={90}
             key={i.sys.id}
             cursor="pointer"
             onClick={() => {
