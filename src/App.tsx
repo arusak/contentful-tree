@@ -19,7 +19,7 @@ function App() {
   }, [roles])
 
   return (
-    <Container fluid p="8" minH="100vh">
+    <Container fluid p="8" minH="100vh" bg="gray.50">
       {error && (
         <Alert.Root status="error" className="mb-6 rounded-md">
           <Alert.Title>Error loading content!</Alert.Title>
