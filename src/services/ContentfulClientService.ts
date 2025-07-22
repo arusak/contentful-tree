@@ -1,5 +1,5 @@
 import { createClient } from 'contentful'
-import type { EmployeeRoleCollection, FolderCollection, InstructionCollection } from '../types/contentful.ts'
+import type { EmployeeRoleCollection, FolderCollection, InstructionCollection } from 'types/ContentfulTypes.ts'
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,

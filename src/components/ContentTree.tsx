@@ -1,15 +1,15 @@
 import { Bleed, Box, EmptyState, Flex, Grid, Heading, HStack, Text, VStack } from '@chakra-ui/react'
+import { ContentStack } from 'components/ContentStack.tsx'
 import { type FC, useState } from 'react'
-import type { EmployeeRoleEntry, FolderEntry, InstructionEntry } from '../types/contentful'
-import { ContentStack } from './ContentStack.tsx'
+import type { EmployeeRoleEntry, FolderEntry, InstructionEntry } from 'types/ContentfulTypes'
 
-interface ContentTreeProps {
+type Props = {
   folders: FolderEntry[]
   instructions: InstructionEntry[]
   roles: EmployeeRoleEntry[]
 }
 
-export const ContentTree: FC<ContentTreeProps> = ({ folders, instructions, roles }) => {
+export const ContentTree: FC<Props> = ({ folders, instructions, roles }) => {
   const [instruction, setInstruction] = useState<InstructionEntry | null>(null)
 
   const folderMap = new Map<string, FolderEntry>()

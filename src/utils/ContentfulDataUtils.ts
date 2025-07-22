@@ -1,5 +1,5 @@
 import type { Entry } from 'contentful'
-import type { EmployeeRoleEntry, FolderEntry, InstructionEntry, InstructionWithPath } from '../types/contentful'
+import type { EmployeeRoleEntry, FolderEntry, InstructionEntry, InstructionWithPath } from 'types/ContentfulTypes.ts'
 
 const createFolderMap = (folders: FolderEntry[]) => {
   const folderMap = new Map<string, FolderEntry>()

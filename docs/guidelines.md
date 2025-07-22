@@ -155,13 +155,13 @@ Every developer should follow these conventions when contributing to the project
   ```typescript
   import { Box, Grid, GridItem, Separator, Stack } from '@chakra-ui/react'
   ```
-- Use default imports for components and modules with a single export:
+- Never use relative paths for imports; always use absolute paths from the `src` directory:
   ```typescript
-  import App from './App.tsx'
+  import { ContentfulClientService } from 'services/ContentfulClientService.ts'
   ```
 - Use type-only imports for TypeScript types:
   ```typescript
-  import type { ContentfulFolder, ContentfulInstruction } from '../types/contentful.ts'
+  import type { ContentfulFolder, ContentfulInstruction } from 'types/contentful.ts'
   ```
 - Never import React default export in new files, as it is not needed in React 17+:
   ```typescript
@@ -171,6 +171,7 @@ Every developer should follow these conventions when contributing to the project
   // Instead, use named imports if needed
   import { FC } from 'react'
   ```
+- Avoid default exports
 
 #### Hook Guidelines
 

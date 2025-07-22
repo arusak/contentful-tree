@@ -1,10 +1,9 @@
 import { Alert, Container } from '@chakra-ui/react'
+import { ContentTree } from 'components/ContentTree'
+import { LoadingSpinner } from 'components/LoadingSpinner'
+import { RoleSelector } from 'components/RoleSelector'
+import { useContentful } from 'hooks/useContentful'
 import { useEffect, useState } from 'react'
-
-import { ContentTree } from './components/ContentTree.tsx'
-import { LoadingSpinner } from './components/LoadingSpinner'
-import { RoleSelector } from './components/RoleSelector'
-import { useContentful } from './hooks/useContentful'
 
 function App() {
   const { roles, loading, error, folders, instructions } = useContentful()
