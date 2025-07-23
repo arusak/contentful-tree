@@ -13,7 +13,7 @@ export const visualizationPlugin = () =>
           gzipSize: true,
           open: true,
           template: visualisationType,
-          filename: 'build/bundle-stats.html',
+          filename: 'dist/bundle-stats.html',
         }),
       }
     : undefined
