@@ -1,33 +1,38 @@
 {
-  "name": "contentful-app",
+  "name": "contentful-portal-one",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
-    "biome": "npx @biomejs/biome format --write"
+    "biome": "npx @biomejs/biome format --write",
+    "visualize:treemap": "cross-env VISUALIZER=treemap VITE_VERSION=$npm_package_version vite build",
+    "visualize:sunburst": "cross-env VISUALIZER=sunburst VITE_VERSION=$npm_package_version vite build"
   },
   "dependencies": {
     "@chakra-ui/react": "3.22.0",
     "@emotion/react": "11.14.0",
-    "contentful": "11.7.10",
-    "lucide-react": "^0.525.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.1.2",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react": "4.7.0",
     "autoprefixer": "10.4.21",
+    "contentful": "11.7.10",
     "globals": "16.3.0",
+    "lucide-react": "^0.525.0",
     "postcss": "8.5.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "typescript": "5.8.3",
-    "vite": "7.0.5"
+    "vite": "7.0.5",
+    "vite-tsconfig-paths": "5.1.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.2",
+    "@types/node": "24.1.0",
+    "cross-env": "7.0.3",
+    "rollup-plugin-visualizer": "6.0.3"
   },
   "// overrides": {
     "form-data": "used by axios in contentful, version 4.0.3 has a security vulnerability"
