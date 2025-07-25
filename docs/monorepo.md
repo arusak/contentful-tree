@@ -1,6 +1,6 @@
 ### Monorepo Setup Overview
 
-This project uses a **npm workspaces-based monorepo** setup with the following structure:
+This project uses a **npm workspaces-based monorepo** setup to manage multiple packages within a single repository. This approach simplifies dependency management, ensures consistency, and facilitates code sharing across packages.
 
 ### Project Structure
 
@@ -8,9 +8,9 @@ This project uses a **npm workspaces-based monorepo** setup with the following s
 contentful-web/
 ├── packages/
 │   ├── core/            (@contentful-web/core - shared library)
-│   ├── customer-ui/     (@contentful-web/customer-ui - react web application)
-│   └── support-ui/      (@contentful-web/support-ui - react web application)
-├── biome.jsonc (shared biome configuration)
+│   ├── customer-ui/     (@contentful-web/customer-ui - React web application for customers)
+│   └── support-ui/      (@contentful-web/support-ui - React web application for support staff)
+├── biome.json (shared biome configuration)
 ├── package.json (root workspace configuration)
 └── node_modules/ (hoisted dependencies)
 ```
@@ -31,26 +31,70 @@ The monorepo is configured using **npm workspaces** in the root `package.json`:
 ### Package Architecture
 
 #### **Core Package (`@contentful-web/core`)**
-- **Purpose**: Shared library containing common utilities, services, and types
-- **Build Output**: Compiled TypeScript library with type definitions
+- **Purpose**: Provides shared logic, utilities, and services for interacting with Contentful.
+- **Build Output**: Compiled TypeScript library with type definitions.
+- **Usage**: Consumed as a dependency by the `customer-ui` and `support-ui` packages.
 
 #### **Web Packages (`@contentful-web/customer-ui`, `@contentful-web/support-ui`)**
-- **Purpose**: React web applications built with Vite
-- **Dependencies**: Consume `@kcast-fe/core` as a dependency
+- **Purpose**: React web applications built with Vite.
+- **Dependencies**: Consume `@contentful-web/core` for shared functionality.
 
-### ### Build System & Scripts
+### Build System & Scripts
 
-The monorepo uses a **dependency-aware build system**:
+The monorepo uses a **dependency-aware build system** to ensure proper sequencing of builds:
 
-```json
-{
-  "dev:support": "npm run build:deps && npm run dev -w packages/support-ui",
-  "dev:customer": "npm run build:deps && npm run dev -w packages/customer-ui",
-  "build": "npm run build:deps && cd packages/support-ui && npm run build && cd packages/customer-ui && npm run build",
-  "build:deps": "npm run build -w packages/core"
-}
+#### Development Scripts
+- **Run `support-ui` in development mode**:
+  ```bash
+  npm run dev --workspace=support-ui
+  ```
+- **Run `customer-ui` in development mode**:
+  ```bash
+  npm run dev --workspace=customer-ui
+  ```
+
+#### Build Scripts
+- **Build all packages**:
+  ```bash
+  npm run build
+  ```
+- **Build the `core` package**:
+  ```bash
+  npm run build --workspace=core
+  ```
+- **Build a specific web package**:
+  ```bash
+  npm run build --workspace=support-ui
+  ```
+
+#### Testing Scripts
+- **Run tests for all packages**:
+  ```bash
+  npm test
+  ```
+- **Run tests for a specific package**:
+  ```bash
+  npm test --workspace=core
+  ```
+
+### Adding Dependencies
+
+To add a dependency to a specific package:
+```bash
+npm install <dependency-name> --workspace=<package-name>
 ```
 
-**Build Flow**:
-1. First builds the `core` package (TypeScript compilation)
-2. Then builds/runs the dependent packages (which depends on the built core)
+To add a dependency to all packages:
+```bash
+npm install <dependency-name>
+```
+
+### Making Changes
+
+- **Core Package**: Update shared logic or utilities in `packages/core`.
+- **Web Packages**: Modify React components or scenes in `packages/customer-ui` or `packages/support-ui`.
+
+### Key Benefits of Monorepo
+- **Centralized Dependency Management**: Dependencies are hoisted to the root, reducing duplication.
+- **Code Sharing**: Shared logic in `core` ensures consistency across applications.
+- **Simplified Builds**: Dependency-aware scripts streamline the build process.
