@@ -1,6 +1,6 @@
 import { Box, createListCollection, Flex, Portal, Select, Spinner, useSelectContext } from '@chakra-ui/react'
+import type { EmployeeRoleEntry } from '@contentful-web/core'
 import type { FC } from 'react'
-import type { EmployeeRoleEntry } from 'types/ContentfulTypes.ts'
 
 type Props = {
   roles: EmployeeRoleEntry[]

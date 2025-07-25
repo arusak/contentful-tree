@@ -13,7 +13,7 @@
     "rules": {
       "recommended": true
     },
-    "includes": ["**", "!dist"]
+    "includes": ["packages/**", "!node_modules", "!dist"]
   },
   "javascript": {
     "formatter": {

@@ -1,6 +1,6 @@
 import { Avatar, Box, Flex, HStack, Menu, Portal, Tabs } from '@chakra-ui/react'
-import logoSvg from 'assets/logo.svg'
 import { ChevronDown, LogOut } from 'lucide-react'
+import logoSvg from 'assets/logo.svg'
 import type { FC } from 'react'
 
 type Props = {

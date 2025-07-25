@@ -24,9 +24,9 @@ The app works with three content types:
 2. **Configure Contentful**
    Create a `.env` file with:
    ```
-   VITE_CONTENTFUL_SPACE_ID=your_space_id
-   VITE_CONTENTFUL_ACCESS_TOKEN=your_access_token
-   VITE_CONTENTFUL_ENVIRONMENT=master
+   CONTENTFUL_SPACE_ID=your_space_id
+   CONTENTFUL_ACCESS_TOKEN=your_access_token
+   CONTENTFUL_ENVIRONMENT=master
    ```
 
 3. **Run the app**

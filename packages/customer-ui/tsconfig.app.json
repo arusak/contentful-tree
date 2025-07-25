@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowImportingTsExtensions": true,
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "erasableSyntaxOnly": true,
     "jsx": "react-jsx",
     "isolatedModules": true,
@@ -20,5 +20,5 @@
     "useDefineForClassFields": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["src"]
+  "include": ["./src"]
 }

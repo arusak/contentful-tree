@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { fetchContentfulData } from 'services/ContentfulClientService.ts'
-import type { EmployeeRoleEntry, FolderEntry, InstructionEntry, InstructionWithPath } from 'types/ContentfulTypes.ts'
-import { processInstructions } from 'utils/ContentfulDataUtils.ts'
+import { fetchContentfulData } from '../services/ContentfulClientService'
+import type { EmployeeRoleEntry, FolderEntry, InstructionEntry, InstructionWithPath } from '../types/ContentfulTypes'
+import { processInstructions } from '../utils/ContentfulDataUtils'
 
 export const useContentful = () => {
   const [folders, setFolders] = useState<FolderEntry[]>([])

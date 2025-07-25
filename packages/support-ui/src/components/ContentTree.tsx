@@ -1,7 +1,7 @@
 import { Bleed, Box, EmptyState, Flex, Grid, Heading, HStack, Text, VStack } from '@chakra-ui/react'
-import { ContentStack } from 'components/ContentStack.tsx'
+import type { EmployeeRoleEntry, FolderEntry, InstructionEntry } from '@contentful-web/core'
+import { ContentStack } from 'components/ContentStack'
 import { type FC, useState } from 'react'
-import type { EmployeeRoleEntry, FolderEntry, InstructionEntry } from 'types/ContentfulTypes'
 
 type Props = {
   folders: FolderEntry[]

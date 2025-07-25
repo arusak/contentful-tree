@@ -1,7 +1,7 @@
 import { Box, Grid, GridItem, Separator, Stack } from '@chakra-ui/react'
+import type { FolderEntry, InstructionEntry } from '@contentful-web/core'
 import { ChevronRight, FileText } from 'lucide-react'
 import { type FC, useState } from 'react'
-import type { FolderEntry, InstructionEntry } from 'types/ContentfulTypes.ts'
 
 type Props = {
   foldersMap: Map<string, FolderEntry>

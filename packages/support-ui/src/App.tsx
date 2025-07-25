@@ -1,9 +1,9 @@
 import { Alert, Container } from '@chakra-ui/react'
-import { ContentTree } from 'components/ContentTree.tsx'
-import { Header } from 'components/Header.tsx'
-import { LoadingSpinner } from 'components/LoadingSpinner.tsx'
-import { RoleSelector } from 'components/RoleSelector.tsx'
-import { useContentful } from 'hooks/useContentful.ts'
+import { useContentful } from '@contentful-web/core'
+import { ContentTree } from 'components/ContentTree'
+import { Header } from 'components/Header'
+import { LoadingSpinner } from 'components/LoadingSpinner'
+import { RoleSelector } from 'components/RoleSelector'
 import { useEffect, useState } from 'react'
 
 export const App = () => {

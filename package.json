@@ -1,43 +1,35 @@
 {
   "name": "contentful-portal-one",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev:support": "npm run build:deps && npm run dev -w packages/support-ui",
+    "dev:customer": "npm run build:deps && npm run dev -w packages/customer-ui",
+    "build": "npm run build:deps && npm run build:support && npm run build:customer",
+    "build:deps": "npm run build -w packages/core",
+    "build:support": "npm run build -w packages/support-ui",
+    "build:customer": "npm run build -w packages/customer-ui",
     "preview": "vite preview",
     "biome": "npx @biomejs/biome format --write",
-    "visualize:treemap": "cross-env VISUALIZER=treemap VITE_VERSION=$npm_package_version vite build",
-    "visualize:sunburst": "cross-env VISUALIZER=sunburst VITE_VERSION=$npm_package_version vite build"
+    "visualize:treemap": "cross-env VISUALIZER=treemap VERSION=$npm_package_version vite build",
+    "visualize:sunburst": "cross-env VISUALIZER=sunburst VERSION=$npm_package_version vite build"
   },
   "dependencies": {
-    "@chakra-ui/react": "3.22.0",
-    "@emotion/react": "11.14.0",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
-    "@vitejs/plugin-react": "4.7.0",
-    "autoprefixer": "10.4.21",
-    "contentful": "11.7.10",
-    "globals": "16.3.0",
-    "lucide-react": "^0.525.0",
-    "postcss": "8.5.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "typescript": "5.8.3",
-    "vite": "7.0.5",
-    "vite-tsconfig-paths": "5.1.4"
+    "typescript": "5.8.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.2",
     "@types/node": "24.1.0",
     "cross-env": "7.0.3",
+    "rimraf": "6.0.1",
     "rollup-plugin-visualizer": "6.0.3"
   },
-  "// overrides": {
-    "form-data": "used by axios in contentful, version 4.0.3 has a security vulnerability"
-  },
-  "overrides": {
-    "form-data": "4.0.4"
-  }
+  "workspaces": [
+    "packages/core",
+    "packages/customer-ui",
+    "packages/support-ui"
+  ]
 }

@@ -1,0 +1,21 @@
+{
+  "name": "@contentful-web/core",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist/",
+    "build": "npm run clean && rollup -c"
+  },
+  "dependencies": {
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-replace": "6.0.2",
+    "@rollup/plugin-typescript": "12.1.4",
+    "contentful": "11.7.12",
+    "dotenv": "17.2.1",
+    "fast-glob": "3.3.3",
+    "rollup": "4.45.1"
+  }
+}
