@@ -6,6 +6,6 @@ import { visualizationPlugin } from './config/visualization.plugin.ts'
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), visualizationPlugin()],
   css: {
-    postcss: './postcss.config.cjs',
+    postcss: './config/postcss.config.js',
   },
 })
